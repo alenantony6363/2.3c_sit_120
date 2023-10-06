@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 Concepts Demo</title>
+    <script type="module">
+      // Import Vue 3 from CDN
+      import { createApp, ref, computed } from 'https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.esm-browser.js';
+
+      const app = createApp({
+        data() {
+          return {
+            // 1. Template Syntax
+            greeting: "Hello, Vue!",
+            rawHTML: "<em>Rendered as HTML</em>",
+            elementId: "my-dynamic-element",
+
+            // 2. Methods
+            sayHello() {
+              alert("Hello!");
+            },
+
+            // 3. Reactivity Fundamentals
+            count: ref(0),
+            incrementCount() {
+              this.count++;
+            },
+
+            // 4. Computed Properties
+          };
+        },
+        computed: {
+          // 4. Computed Properties
+          doubleCount() {
+            return computed(() => this.count.value * 2);
+          },
+        },
+        methods: {
+          // 7. Event Handling: Listening to Events
+          showAlert() {
+            alert("Inline Handler: Hello!");
+          },
+        },
+      });
+
+      app.mount('#app');
+    </script>
+</head>
+<body>
+    <div id="app">
+      <h1 style="color: #333; text-align: center;">Hello World</h1>
+
+      <!-- 1. Template Syntax -->
+      <div class="section">
+        <!-- a. Text Interpolation -->
+        <p>{{ greeting }}</p>
+
+        <!-- b. Raw HTML [v-html] -->
+        <p v-html="rawHTML"></p>
+
+        <!-- c. Attribute Bindings [v-bind:id] -->
+        <div :id="elementId">Dynamic ID Element</div>
+
+        <!-- d. JavaScript expressions inside syntax i.e.{{ }} -->
+        <p>{{ 3 * 5 }}</p>
+      </div>
+
+      <!-- 2. Methods -->
+      <div class="section">
+        <button class="button" @click="sayHello" style="background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer; padding: 10px 20px;">Say Hello</button>
+      </div>
+
+      <!-- 3. Reactivity Fundamentals [ref(), <script setup>] -->
+      <div class="section">
+        <p>{{ count }}</p>
+        <button class="button" @click="incrementCount" style="background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer; padding: 10px 20px;">Increment Count</button>
+      </div>
+
+      <!-- 4. Computed Properties -->
+      <div class="section">
+        <p>Computed Property: {{ doubleCount }}</p>
+      </div>
+
+      <!-- 5. Class and Style Bindings -->
+      <div class="section">
+        <!-- a. Binding HTML class [v-bind:class] -->
+        <div :class="{'active': isActive, 'error': hasError}" style="color: green; font-size: 20px;">Conditional Classes</div>
+
+        <!-- b. Binding Inline Styles [v-bind:style] -->
+        <div :style="{'color': textColor, 'font-size': fontSize + 'px'}" style="color: blue; font-size: 30px;">Inline Styles</div>
+      </div>
+
+      <!-- 6. List Rendering -->
+      <div class="section">
+        <!-- a. v-for with an Object -->
+        <ul>
+          <li v-for="(value, key) in myObject">{{ key }}: {{ value }}</li>
+        </ul>
+
+        <!-- b. v-for with a Range -->
+        <ul>
+          <li v-for="n in 3">{{ n }}</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <!-- a. Inline Handlers -->
+        <button class="button" @click="showAlert" style="background-color: #007BFF; color: #fff; border: none; border-radius: 5px; cursor: pointer; padding: 10px 20px;">Show Alert (Inline)</button>
+      </div>
+
+      <!-- 8. Form Input Bindings -->
+      <div class="section">
+      </div>
+    </div>
+</body>
+</html>
+
+
